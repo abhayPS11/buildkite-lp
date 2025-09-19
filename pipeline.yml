@@ -7,8 +7,7 @@ steps:
   - label: "Build & push multi-arch Docker image"
     commands:
       - docker buildx create --use
-      - docker login
-      - echo "DOCKER_USERNAME is: $DOCKER_USERNAME"      
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"      
       - docker buildx build --platform linux/amd64,linux/arm64 -t "$DOCKER_USERNAME/test-x86:latest" --push .
     agents:
       queue: "amd-buildkite"
